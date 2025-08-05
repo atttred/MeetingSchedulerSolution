@@ -52,4 +52,13 @@ public class MemoryRepository
     {
         return Task.FromResult(_users.ContainsKey(userId));
     }
+
+    public Task ResetAsync()
+    {
+        _users.Clear();
+        _meetings.Clear();
+        _nextUserId = 1;
+        _nextMeetingId = 1;
+        return Task.CompletedTask;
+    }
 }

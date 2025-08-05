@@ -4,6 +4,8 @@ using MeetingScheduler.Domain.Services;
 using MeetingScheduler.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
+namespace MeetingScheduler.API.Controllers;
+
 [ApiController]
 [Route("api/[controller]")]
 public class MeetingsController : ControllerBase
