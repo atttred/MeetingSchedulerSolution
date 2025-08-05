@@ -36,19 +36,19 @@ public class MemoryRepository
         return Task.FromResult(meeting);
     }
 
-    public Task<List<Meeting>> GetUserMeetings(int userId)
+    public Task<List<Meeting>> GetUserMeetingsAsync(int userId)
     {
         return Task.FromResult(_meetings.Values
             .Where(m => m.ParticipantIds.Contains(userId))
             .ToList());
     }
 
-    public Task<List<Meeting>> GetAllMeetings()
+    public Task<List<Meeting>> GetAllMeetingsAsync()
     {
         return Task.FromResult(_meetings.Values.ToList());
     }
 
-    public Task<bool> UserExists(int userId)
+    public Task<bool> UserExistsAsync(int userId)
     {
         return Task.FromResult(_users.ContainsKey(userId));
     }
