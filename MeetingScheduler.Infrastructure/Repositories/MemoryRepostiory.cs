@@ -11,7 +11,7 @@ public class MemoryRepository
     private int _nextUserId = 1;
     private int _nextMeetingId = 1;
 
-    public User CreateUser(string name)
+    public Task<User> CreateUserAsync(string name)
     {
         var user = new User
         {
@@ -20,9 +20,9 @@ public class MemoryRepository
         };
 
         _users.TryAdd(user.Id, user);
-        return user;
+        return Task.FromResult(user);
     }
-    public Meeting CreateMeeting(List<int> participantIds, DateTime startTime, DateTime endTime)
+    public Task<Meeting> CreateMeetingAsync(List<int> participantIds, DateTime startTime, DateTime endTime)
     {
         var meeting = new Meeting
         {
@@ -33,23 +33,23 @@ public class MemoryRepository
         };
 
         _meetings.TryAdd(meeting.Id, meeting);
-        return meeting;
+        return Task.FromResult(meeting);
     }
 
-    public List<Meeting> GetUserMeetings(int userId)
+    public Task<List<Meeting>> GetUserMeetings(int userId)
     {
-        return _meetings.Values
+        return Task.FromResult(_meetings.Values
             .Where(m => m.ParticipantIds.Contains(userId))
-            .ToList();
+            .ToList());
     }
 
-    public List<Meeting> GetAllMeetings()
+    public Task<List<Meeting>> GetAllMeetings()
     {
-        return _meetings.Values.ToList();
+        return Task.FromResult(_meetings.Values.ToList());
     }
 
-    public bool UserExists(int userId)
+    public Task<bool> UserExists(int userId)
     {
-        return _users.ContainsKey(userId);
+        return Task.FromResult(_users.ContainsKey(userId));
     }
 }
